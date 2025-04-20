@@ -33,3 +33,21 @@ end_time = time.perf_counter()
 
 print(f"\n✅ Inserted {len(customers)} records into Google Bigtable.")
 print(f"⏱️ Time taken: {end_time - start_time:.4f} seconds") #26.3094
+
+
+# Example: Update row for customer_id = "cust123"
+def update_customer():
+    print("🔄 Updating customer 'cust123'...")
+    row_key = b'cust123'
+    row = table.row(row_key)
+    row.set_cell(column_family_id, 'city', 'Toronto')
+    row.set_cell(column_family_id, 'email', 'updated_email@example.com')
+    row.commit()
+    print("✅ Customer updated.")
+
+# Example: Delete row for customer_id = "cust123"
+def delete_customer():
+    print("🗑️ Deleting customer 'cust123'...")
+    row_key = b'cust123'
+    table.delete_rows(row_key)
+    print("✅ Customer deleted.")
